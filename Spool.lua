@@ -31,10 +31,10 @@ function getEntityColor(entity)
 end
 
 -- Define a "bright red" color
-local brightRed = {r = 255, g = 0, b = 0}
+local Pink = {r = 255, g = 182, b = 193}
 
 -- Function to check if a color is close to bright red
-function isBrightRed(color)
+function isPink(color)
     local r, g, b = color
     -- Implement color difference calculation here (e.g., Euclidean distance)
     local distance = math.sqrt((r - brightRed.r)^2 + (g - brightRed.g)^2 + (b - brightRed.b)^2)
