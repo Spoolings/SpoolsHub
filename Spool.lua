@@ -32,3 +32,34 @@ local refreshHandle = coroutine.wrap(function()
     end
 end)
 refreshHandle()
+
+
+
+
+
+
+-- Assuming you have a function to get the dominant color of an entity
+function getEntityColor(entity)
+    local r, g, b = getColorFromEntity(entity) -- Replace with actual implementation
+    return r, g, b
+end
+
+-- Define a "bright red" color
+local brightRed = {r = 255, g = 0, b = 0}
+
+-- Function to check if a color is close to bright red
+function isBrightRed(color)
+    local r, g, b = color
+    -- Implement color difference calculation here (e.g., Euclidean distance)
+    local distance = math.sqrt((r - brightRed.r)^2 + (g - brightRed.g)^2 + (b - brightRed.b)^2)
+    return distance < threshold -- Adjust the threshold as needed
+end
+
+-- In your main ESP loop:
+for _, entity in ipairs(entities) do
+    local color = getEntityColor(entity)
+    if isBrightRed(color) then
+        -- Highlight the entity as a target
+        highlightEntity(entity)
+    end
+end
