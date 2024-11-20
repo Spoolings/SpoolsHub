@@ -1,5 +1,3 @@
--- ServerScriptService
-
 local Players = game:GetService("Players")
 
 local function highlightPlayer(player)
@@ -8,31 +6,19 @@ local function highlightPlayer(player)
     highlight.Archivable = true
     highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
     highlight.Enabled = true
-    highlight.FillColor = Color3.fromRGB(255, 0, 0)
+    highlight.FillColor = Color3.fromRGB(255, 182, 193) -- Bubblegum pink
     highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
     highlight.FillTransparency = 0.5
     highlight.OutlineTransparency = 0
 end
 
-local function refreshHighlights()
-    for _, player in pairs(Players:GetPlayers()) do
-        highlightPlayer(player)
-    end
+-- Highlight all existing players
+for _, player in pairs(Players:GetPlayers()) do
+    highlightPlayer(player)
 end
 
--- Initial highlight
-refreshHighlights()
-
--- Repeat every second
-local refreshInterval = 1 -- seconds
-local refreshHandle = coroutine.wrap(function()
-    while true do
-        task.wait(refreshInterval)
-        refreshHighlights()
-    end
-end)
-refreshHandle()
-
+-- Highlight new players when they join
+Players.PlayerAdded:Connect(highlightPlayer)
 
 
 
